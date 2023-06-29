@@ -1,0 +1,187 @@
+  CREATE TABLE "SYSTEM"."TB_1" 
+   (	"ID_TB1" NUMBER(10,0), 
+	"NOMBRE" NVARCHAR2(30), 
+	"PRECIO" NUMBER(10,2), 
+	"NUM_TIPO" NUMBER(10,0), 
+	"NUM_MAR" NUMBER(10,0)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
+  CREATE OR REPLACE TRIGGER "SYSTEM"."VITAMI_T" 
+After insert on tb_1
+for each row
+Declare
+  co nvarchar2(10);
+  ttt nvarchar2(10);
+begin
+ co:='';
+ ttt:='T';
+ co:=co||SUBSTR(:New.nombre,1,1) ;
+    if(ttt=co) then
+        insert into TT values ('Producto con la vitamina T ' || :New.nombre ) ;
+    end if;
+end vitami_T;
+/
+ALTER TRIGGER "SYSTEM"."VITAMI_T" ENABLE;
+
+  CREATE OR REPLACE TRIGGER "SYSTEM"."TR_AUTOMATICO" 
+AFTER INSERT ON tb_1
+FOR EACH ROW
+DECLARE
+  Valor number(10);
+begin
+ Valor:='';
+ Valor:=:New.num_tipo;
+    if(1=Valor) then
+        insert into tb_2 values (id_in.nextval, 1, 'Pan') ;
+    end if;  
+    if(2=Valor) then
+        insert into tb_2 values (id_in.nextval, 2, 'Tacos') ;
+    end if; 
+    if(3=Valor) then
+        insert into tb_2 values (id_in.nextval, 3,  'Pizza') ;
+    end if; 
+    if(4=Valor) then
+        insert into tb_2 values (id_in.nextval, 4,  'Agua') ;
+    end if; 
+    if(5=Valor) then
+        insert into tb_2 values (id_in.nextval, 5,  'Dulce') ;
+    end if; 
+    if(6=Valor) then
+        insert into tb_2 values (id_in.nextval, 6, 'Cigarro') ;
+    end if; 
+    if(7=Valor) then
+        insert into tb_2 values (id_in.nextval, 7, 'Chetos') ;
+    end if; 
+    if(8=Valor) then
+        insert into tb_2 values (id_in.nextval, 8, 'Gomitas') ;
+    end if; 
+    if(9=Valor) then
+        insert into tb_2 values (id_in.nextval, 9, 'drogas_duras') ;
+    end if; 
+    if(10=Valor) then
+        insert into tb_2 values (id_in.nextval, 10, 'Gorditas') ;
+    end if;
+    if(11=Valor) then
+        insert into tb_2 values (id_in.nextval, 11, 'yogurt') ;
+    end if; 
+    if(12=Valor) then
+        insert into tb_2 values (id_in.nextval, 12, 'Cubrebocas') ;
+    end if; 
+end tr_automatico;
+/
+ALTER TRIGGER "SYSTEM"."TR_AUTOMATICO" ENABLE;
+
+  CREATE OR REPLACE TRIGGER "SYSTEM"."TR_AUTOMATICO2" 
+After insert on tb_1
+for each row
+Declare
+  Valor2 number(10);
+begin
+ Valor2:='';
+ Valor2:=:New.num_mar;
+    if(1=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 1,  'El tio') ;
+    end if;  
+    if(2=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 2,  'Pizza planeta') ;
+    end if; 
+    if(3=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 3, 'Aguas locas') ;
+    end if; 
+    if(4=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 4, 'Doña pelos') ;
+    end if; 
+    if(5=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 5, 'Doña lupe') ;
+    end if; 
+    if(6=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 6, 'Magic candy') ;
+    end if; 
+    if(7=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 7, 'Doña chetos') ;
+    end if; 
+    if(10=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 10, 'Sabritas') ;
+    end if; 
+    if(11=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 11, 'Barcel') ;
+    end if; 
+    if(12=Valor2) then
+        insert into tb_3 values (id_inc.nextval, 12, 'Cocacola') ;
+    end if; 
+end tr_automatico2;
+/
+ALTER TRIGGER "SYSTEM"."TR_AUTOMATICO2" ENABLE;
+
+
+
+
+  CREATE TABLE "SYSTEM"."TB_2" 
+   (	"ID_TB2" NUMBER(10,0), 
+	"IDENTIFI2" NUMBER(10,0), 
+	"TIPO" NVARCHAR2(50)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
+
+    CREATE TABLE "SYSTEM"."TB_3" 
+   (	"ID_TB3" NUMBER(10,0), 
+	"IDENTIFI3" NUMBER(10,0), 
+	"MARCA" NVARCHAR2(50)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
+
+  create or replace trigger vitami_T
+After insert on tb_1
+for each row
+Declare
+  co nvarchar2(10);
+  ttt nvarchar2(10);
+begin
+ co:='';
+ ttt:='T';
+ co:=co||SUBSTR(:New.nombre,1,1) ;
+    if(ttt=co) then
+        insert into TT values ('Producto con la vitamina T ' || :New.nombre ) ;
+    end if;
+end vitami_T;
+
+
+  CREATE OR REPLACE FORCE VIEW "SYSTEM"."E" ("NOMBRE", "PRECIO", "TIPO", "MARCA") AS 
+  select nombre, precio,tipo,marca
+
+from tb_1 full join tb_2 on num_tipo=identifi2 and id_tb1=id_tb2 full join tb_3 on num_mar=identifi3 and id_tb1=id_tb3;
+
+
+  CREATE OR REPLACE FORCE VIEW "SYSTEM"."EX" ("NOMBRE", "PRECIO", "IDENTIFI2", "TIPO") AS 
+  select nombre, precio, identifi2, tipo
+from tb_1 inner join tb_2 on num_tipo=identifi2 and id_tb1=id_tb2 
+where tipo='Ricos tacos de Canasta';
+
+  CREATE OR REPLACE FORCE VIEW "SYSTEM"."EXA" ("ID_TB1", "NOMBRE", "PRECIO", "NUM_TIPO", "NUM_MAR", "ID_TB2", "IDENTIFI2", "TIPO") AS 
+  select "ID_TB1","NOMBRE","PRECIO","NUM_TIPO","NUM_MAR","ID_TB2","IDENTIFI2","TIPO" 
+from tb_1 left join tb_2 on num_tipo=identifi2 and id_tb1=id_tb2;
+
+  CREATE OR REPLACE FORCE VIEW "SYSTEM"."EXAM" ("ID_TB1", "NOMBRE", "PRECIO", "NUM_TIPO", "NUM_MAR", "ID_TB3", "IDENTIFI3", "MARCA") AS 
+  select "ID_TB1","NOMBRE","PRECIO","NUM_TIPO","NUM_MAR","ID_TB3","IDENTIFI3","MARCA" 
+from tb_1 right join tb_3 on num_mar=identifi3 and id_tb1=id_tb3
+where num_mar is null or identifi3 is null;
+
+
+  CREATE OR REPLACE FORCE VIEW "SYSTEM"."EXAME" ("ID_TB1", "NOMBRE", "PRECIO", "NUM_TIPO", "NUM_MAR", "ID_TB3", "IDENTIFI3", "MARCA", "ID_TB2", "IDENTIFI2", "TIPO") AS 
+  select "ID_TB1","NOMBRE","PRECIO","NUM_TIPO","NUM_MAR","ID_TB3","IDENTIFI3","MARCA","ID_TB2","IDENTIFI2","TIPO" 
+from tb_1 full join tb_3 on num_mar = identifi3 and id_tb1 = id_tb3 full join tb_2 on num_tipo = identifi2 and id_tb1 = id_tb2
+where num_mar is null or identifi3 is null or identifi2 is null;
+
+  CREATE OR REPLACE FORCE VIEW "SYSTEM"."EXAMEN" ("ID_TB1", "NOMBRE", "PRECIO", "NUM_TIPO", "NUM_MAR", "ID_TB3", "IDENTIFI3", "MARCA", "ID_TB2", "IDENTIFI2", "TIPO") AS 
+  select "ID_TB1","NOMBRE","PRECIO","NUM_TIPO","NUM_MAR","ID_TB3","IDENTIFI3","MARCA","ID_TB2","IDENTIFI2","TIPO" 
+from tb_1 full join tb_3 on num_mar=identifi3 and id_tb1=id_tb3 full join tb_2 on num_tipo=identifi2 and id_tb1=id_tb2 
+where Tipo like'P%' and nombre like  'P%' or nombre like  'B%' and tipo like'B%';
